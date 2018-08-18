@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_08_18_093353) do
     t.string "facility_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["location"], name: "index_relief_facilities_on_location", using: :gist
   end
 
 end
