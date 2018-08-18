@@ -6,4 +6,20 @@ class ReliefFacility < ApplicationRecord
      ST_Distance(location, 'POINT(%f %f)') < %d
     } % [longitude, latitude, distance_in_km * 1000]) # approx
   }
+
+  enum district: [:ernakulam,
+                  :malapuram,
+                  :idukki,
+                  :kannur,
+                  :wayanad,
+                  :palakkad,
+                  :thrissur,
+                  :kozhikode,
+                  :pathanamthitta,
+                  :alappuzha,
+                  :kottayam,
+                  :kollam,
+                  :thiruvananthapuram,
+                  :malappuram
+                ]
 end
