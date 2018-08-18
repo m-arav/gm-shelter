@@ -20,7 +20,9 @@ function addMarker(ldata) {
     }
     let infoDetails = '<h3>' + ldata.name + '</h3>' +
 	'<div id="address"> <b>Address : </b> ' + ldata.humanized_address + '</div><br>' +
-	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div><br>' + nearCCButton
+	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div><br>' +
+        '<a href="' + 'https://www.google.com/maps/search/?api=1&query=' + ldata.location.lat + ',' + ldata.location.lon + '" target="_blank">Open in Google Maps</a><br><br>' +
+	nearCCButton
 
     let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
     if(ldata.facility_type == 'relief_material_collection'){
