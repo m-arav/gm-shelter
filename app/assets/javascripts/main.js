@@ -15,14 +15,16 @@ function initMap() {
 
 function addMarker(ldata) {
     let nearCCButton = ''
+    let directionToCCButton = ''
     if(ldata.facility_type != 'relief_material_collection'){
-	nearCCButton = 	'<input class="primary-btn" onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">'
+	nearCCButton = 	'<input class="primary-btn" onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">';
+	directionToCCButton = '<input class="primary-btn" onclick="routeToNearestCC('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Direction to nearest collection center">';
     }
     let infoDetails = '<h3>' + ldata.name + '</h3>' +
 	'<div id="address"> <b>Address : </b> ' + ldata.humanized_address + '</div><br>' +
 	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div><br>' +
         '<a href="' + 'https://www.google.com/maps/search/?api=1&query=' + ldata.location.lat + ',' + ldata.location.lon + '" target="_blank">Open in Google Maps</a><br><br>' +
-	nearCCButton
+	nearCCButton + '<br><br>' + directionToCCButton;
 
     let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
     if(ldata.facility_type == 'relief_material_collection'){
@@ -67,12 +69,23 @@ function deleteMarkers() {
 
 function nearByCollectionCenters(lat, lng){
     url = '/relief_facilities/search?within=' + lat + ',' + lng;
-    console.log(url);
     $.get(url, function(data){
-	console.log(data);
 	deleteMarkers();
 	data.forEach(function(d){
 	    addMarker(d);
 	});
+    });
+}
+
+function routeToNearestCC(lat, lng){
+    url = '/relief_facilities/search?within=' + lat + ',' + lng;
+    $.get(url, function(data){
+	nearestCC = data[0];
+	if(nearestCC){
+	    routeURL = 'https://www.google.com/maps/dir/?api=1&origin=' + lat + ',' + lng + '&destination=' + nearestCC.location.lat + ',' + nearestCC.location.lon
+	    var win = window.open(routeURL, '_blank');
+	} else{
+	    alert("No centers within 8 kms");
+	}
     });
 }
