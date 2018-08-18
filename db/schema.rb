@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2018_08_18_123507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "district"
-    t.index ["location"], name: "index_relief_facilities_on_location", using: :gist
     t.index ["district"], name: "index_relief_facilities_on_district"
+    t.index ["location"], name: "index_relief_facilities_on_location", using: :gist
   end
 
 end
