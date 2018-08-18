@@ -4,7 +4,7 @@ var collectionCenterIcon = 'http://res.cloudinary.com/drch6exvq/image/upload/c_s
 
 function initMap() {
     map = new google.maps.Map(
-	document.getElementById('map'), {zoom: 4, center: {lat: 10.8505, lng: 76.2711}});
+	document.getElementById('map'), {zoom: 12, center: {lat: 9.97892, lng: 76.3180348}});
 
     $.get('/relief_facilities/search', function(data){
 	data.forEach(function(d){
@@ -19,8 +19,8 @@ function addMarker(ldata) {
 	nearCCButton = 	'<input onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">'
     }
     let infoDetails = '<h3>' + ldata.name + '</h3>' +
-	'<div id="address">' + ldata.humanized_address + '</div><br>' +
-	'<div id="details">' + ldata.details + '</div><br>' + nearCCButton
+	'<div id="address"> <b>Address : </b> ' + d.humanized_address + '</div><br>' +
+	'<div id="details"> <b>Contact : </b>' + d.contact + '</div>' + nearCCButton
     
     let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
     if(ldata.facility_type == 'relief_material_collection'){
