@@ -1,7 +1,6 @@
 var map;
 var markers = [];
-var collectionCenterIcon = 'http://maps.google.com/mapfiles/kml/pal5/icon58.png'
-var infowindow = new google.maps.InfoWindow;
+var collectionCenterIcon = 'http://res.cloudinary.com/drch6exvq/image/upload/c_scale,h_32/v1534605020/Kerala%20Flood/collection.png'
 
 function initMap() {
     map = new google.maps.Map(
@@ -9,28 +8,37 @@ function initMap() {
 
     $.get('/relief_facilities/search', function(data){
 	data.forEach(function(d){
-	    infoDetails = '<h3>' + d.name + '</h3>' +
-		'<div id="address">' + d.humanized_address + '</div><br>' +
-		'<div id="details">' + d.details + '</div>'
-	    
-	    markerInfo = {location: {position: {lat: d.location.lat, lng: d.location.lon}, icon: null}, info: infoDetails, id: d.id};
-	    if(d.facility_type == 'relief_material_collection'){
-		markerInfo.location.icon = collectionCenterIcon;
-	    };
-	    addMarker(markerInfo);
+	    addMarker(d);
 	});
     });
 }
 
-function addMarker(markerInfo) {
+function addMarker(data) {
+    infoDetails = '<h3>' + data.name + '</h3>' +
+	'<div id="address">' + data.humanized_address + '</div><br>' +
+	'<div id="details">' + data.details + '</div>'
+    
+    markerInfo = {location: {position: {lat: data.location.lat, lng: data.location.lon}, icon: null}, info: infoDetails, id: data.id, facilityType: data.facility_type};
+    if(data.facility_type == 'relief_material_collection'){
+	markerInfo.location.icon = collectionCenterIcon;
+    };
+
     var marker = new google.maps.Marker(markerInfo.location);
     marker.set("id", markerInfo.id);
-    console.log(markerInfo.location.icon);
     infowindow = new google.maps.InfoWindow
     marker.addListener('click', function() {
 	infowindow.setContent(markerInfo.info);
 	infowindow.open(map, marker);
+	url = '/relief_facilities/search?within=' + marker.position.lat() + ',' + marker.position.lng()
+	$.get(url, function(data){
+	    console.log(data);
+	    deleteMarkers();
+	    data.forEach(function(d){
+		addMarker(d);
+	    });
+	});
     });
+    
     marker.setMap(map)
     markers.push(marker);
 }
@@ -47,4 +55,9 @@ function clearMarkers() {
 
 function showMarkers() {
     setMapOnAll(map);
+}
+
+function deleteMarkers() {
+    clearMarkers();
+    markers = [];
 }
