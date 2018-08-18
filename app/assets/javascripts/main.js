@@ -19,8 +19,8 @@ function addMarker(ldata) {
 	nearCCButton = 	'<input onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">'
     }
     let infoDetails = '<h3>' + ldata.name + '</h3>' +
-	'<div id="address"> <b>Address : </b> ' + d.humanized_address + '</div><br>' +
-	'<div id="details"> <b>Contact : </b>' + d.contact + '</div>' + nearCCButton
+	'<div id="address"> <b>Address : </b> ' + ldata.humanized_address + '</div><br>' +
+	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div>' + nearCCButton
     
     let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
     if(ldata.facility_type == 'relief_material_collection'){
