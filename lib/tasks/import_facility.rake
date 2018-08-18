@@ -9,7 +9,7 @@ task :import_facilities => :environment do
     data = {name: raw.shift,
             contact: raw.shift,
             humanized_address: raw.shift,
-            facility_type: raw.shift.downcase.camelcase,
+            facility_type: raw.shift.parameterize.underscore,
             details: raw.shift,
             location: RGeo::Cartesian.factory(:srid => 4326).point(*raw.shift.split(",").collect(&:to_f))
            } rescue nil
