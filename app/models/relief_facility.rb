@@ -1,4 +1,5 @@
 class ReliefFacility < ApplicationRecord
+  include ActiveModel::Serialization
 
   scope :within, -> (latitude, longitude, distance_in_km = 5) {
     where(%{
