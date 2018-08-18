@@ -1,0 +1,2 @@
+class ReliefFacility < ApplicationRecord
+end
