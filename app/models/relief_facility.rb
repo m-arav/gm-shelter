@@ -4,7 +4,7 @@ class ReliefFacility < ApplicationRecord
   scope :within, -> (latitude, longitude, distance_in_km = 5) {
     where(%{
      ST_Distance(location, 'POINT(%f %f)') < %d
-    } % [longitude, latitude, distance_in_km * 1000]) # approx
+    } % [longitude, latitude, distance_in_km * 5000]) # approx
   }
 
   enum district: [:ernakulam,
