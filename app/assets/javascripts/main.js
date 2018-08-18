@@ -50,7 +50,12 @@ function clearMarkers() {
 }
 
 function showMarkers() {
-    setMapOnAll(map);
+    clearMarkers();
+    $.get('/relief_facilities/search', function(data){
+	data.forEach(function(d){
+	    addMarker(d);
+	});
+    });
 }
 
 function deleteMarkers() {
