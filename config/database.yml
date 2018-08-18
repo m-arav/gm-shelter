@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgis
   database: gm-shelter_production
   username: gm-shelter
   password: <%= ENV['GM-SHELTER_DATABASE_PASSWORD'] %>
