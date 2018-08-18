@@ -11,7 +11,7 @@ task :import_facilities => :environment do
             humanized_address: raw.shift,
             facility_type: raw.shift.parameterize.underscore,
             details: raw.shift,
-            location: RGeo::Cartesian.factory(:srid => 4326).point(*raw.shift.split(",").collect(&:to_f))
+            location: RGeo::Cartesian.factory(:srid => 4326).point(*raw.shift.split(",").collect(&:to_f).reverse)
            } rescue nil
     puts data.inspect
 
