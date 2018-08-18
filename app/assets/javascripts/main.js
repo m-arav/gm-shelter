@@ -13,30 +13,26 @@ function initMap() {
     });
 }
 
-function addMarker(data) {
-    infoDetails = '<h3>' + data.name + '</h3>' +
-	'<div id="address">' + data.humanized_address + '</div><br>' +
-	'<div id="details">' + data.details + '</div>'
+function addMarker(ldata) {
+    let nearCCButton = ''
+    if(ldata.facility_type != 'relief_material_collection'){
+	nearCCButton = 	'<input onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">'
+    }
+    let infoDetails = '<h3>' + ldata.name + '</h3>' +
+	'<div id="address">' + ldata.humanized_address + '</div><br>' +
+	'<div id="details">' + ldata.details + '</div><br>' + nearCCButton
     
-    markerInfo = {location: {position: {lat: data.location.lat, lng: data.location.lon}, icon: null}, info: infoDetails, id: data.id, facilityType: data.facility_type};
-    if(data.facility_type == 'relief_material_collection'){
+    let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
+    if(ldata.facility_type == 'relief_material_collection'){
 	markerInfo.location.icon = collectionCenterIcon;
     };
 
-    var marker = new google.maps.Marker(markerInfo.location);
+    let marker = new google.maps.Marker(markerInfo.location);
     marker.set("id", markerInfo.id);
-    infowindow = new google.maps.InfoWindow
+    infowindow = new google.maps.InfoWindow;
     marker.addListener('click', function() {
 	infowindow.setContent(markerInfo.info);
 	infowindow.open(map, marker);
-	url = '/relief_facilities/search?within=' + marker.position.lat() + ',' + marker.position.lng()
-	$.get(url, function(data){
-	    console.log(data);
-	    deleteMarkers();
-	    data.forEach(function(d){
-		addMarker(d);
-	    });
-	});
     });
     
     marker.setMap(map)
@@ -60,4 +56,16 @@ function showMarkers() {
 function deleteMarkers() {
     clearMarkers();
     markers = [];
+}
+
+function nearByCollectionCenters(lat, lng){
+    url = '/relief_facilities/search?within=' + lat + ',' + lng;
+    console.log(url);
+    $.get(url, function(data){
+	console.log(data);
+	deleteMarkers();
+	data.forEach(function(d){
+	    addMarker(d);
+	});
+    });
 }
