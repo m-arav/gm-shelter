@@ -5,14 +5,14 @@ var infowindow = new google.maps.InfoWindow;
 
 function initMap() {
     map = new google.maps.Map(
-	document.getElementById('map'), {zoom: 4, center: {lat: 10.8505, lng: 76.2711}});
+	document.getElementById('map'), {zoom: 12, center: {lat: 9.97892, lng: 76.3180348}});
 
     $.get('/relief_facilities/search', function(data){
-	data.forEach(function(d){
-	    infoDetails = '<h3>' + d.name + '</h3>' +
-		'<div id="address">' + d.humanized_address + '</div><br>' +
-		'<div id="details">' + d.details + '</div>'
-	    
+	     data.forEach(function(d){
+	        infoDetails = '<h3>' + d.name + '</h3>' +
+		        '<div id="address"> <b>Address : </b> ' + d.humanized_address + '</div><br>' +
+		         '<div id="details"> <b>Contact : </b>' + d.contact + '</div>'
+
 	    markerInfo = {location: {position: {lat: d.location.lat, lng: d.location.lon}, icon: null}, info: infoDetails, id: d.id};
 	    if(d.facility_type == 'relief_material_collection'){
 		markerInfo.location.icon = collectionCenterIcon;
