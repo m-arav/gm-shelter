@@ -20,7 +20,7 @@ function addMarker(ldata) {
     }
     let infoDetails = '<h3>' + ldata.name + '</h3>' +
 	'<div id="address"> <b>Address : </b> ' + ldata.humanized_address + '</div><br>' +
-	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div>' + nearCCButton
+	'<div id="details"> <b>Contact : </b>' + ldata.contact + '</div><br>' + nearCCButton
     
     let markerInfo = {location: {position: {lat: ldata.location.lat, lng: ldata.location.lon}, icon: null}, info: infoDetails, id: ldata.id, facilityType: ldata.facility_type};
     if(ldata.facility_type == 'relief_material_collection'){
