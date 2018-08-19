@@ -88,3 +88,18 @@ function routeToNearestCC(lat, lng) {
 	      } else { alert("No centers within 8 kms"); }
     });
 }
+
+function showNearestLocations(facility_type){
+    lat = 0;
+    lng = 0;
+
+    url = '/relief_facilities/search?within=' + lat + ',' + lng + '&facility_type=' + facility_type;
+    $.get(url, function(data) {
+	if(data.length != 0){
+	    deleteMarkers();
+	    data.forEach(function(d) {
+		addMarker(d);
+	    });
+	} else { alert("No Centers or Shelters near by!"); }
+    });
+}
