@@ -113,7 +113,7 @@ function routeToNearestCC(lat, lng) {
 
 function showNearestLocations(facility_type){
     if (!location_granted) {
-        alert("Please grant location access to use locate near me feature's");
+        alert("Please grant location access to use locate near me feature's\n Default location is Ernakulam");
         requestLocationAccess();
     }
     lat = geo_location.lat;
