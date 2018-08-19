@@ -22,10 +22,14 @@
     border-radius: 2px;
     padding: 11px 12px;
     cursor:pointer;
+    opacity: 1;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
  }
  .primary-btn:hover{
-   background-color: #0162cb;
+   opacity: 0.95;
+ }
+ .green {
+   background-color: #35a818;
  }
  .gm-style-iw > div{
    padding: 6px;
