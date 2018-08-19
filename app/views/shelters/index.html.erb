@@ -1,17 +1,26 @@
 <div id="floating-panel">
-  <div class="marker-visbility-buttons">
-      <input class="primary-btn margin-to-right" onclick="clearMarkers();" type=button value="Hide Markers">
-      <input class="primary-btn margin-to-right" onclick="showMarkers();" type=button value="Show All Markers">
-      <input class="primary-btn margin-to-right" onclick="showLocations('relief_material_collection');" type=button value="All Centers">
-      <input class="primary-btn" onclick="showLocations('shelter');" type=button value="All Shelters">
-  </div>
-  <div>
-      <input class="primary-btn green" onclick="showNearestLocations('relief_material_collection');" type=button value="Centers Near Me">
-      <input class="primary-btn green" onclick="showNearestLocations('shelter');" type=button value="Shelters Near Me">
-  </div>
+
+<div class="btn-group">
+    <button id="options" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters</button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" onclick="clearMarkers();">Hide Markers</a>
+        <a class="dropdown-item" onclick="showMarkers();">Show All Markers</a>
+        <a class="dropdown-item" onclick="showLocations('relief_material_collection');">All Centers</a>
+        <a class="dropdown-item" onclick="showLocations('shelter');">All Shelters</a>
+        <a class="dropdown-item" onclick="showNearestLocations('relief_material_collection');">Centers Near Me</a>
+        <a class="dropdown-item" onclick="showNearestLocations('shelter');">Shelters Near Me</a>
+    </div>
+</div>
 </div>
 
 <div id="map"></div>
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['MAPS_API_KEY'] %>&callback=initMap">
+</script>
+<script>
+  $(document).ready(function(){
+     $(".dropdown-menu a").click(function(){
+       $("#options").text($(this).text());
+     });
+  });
 </script>
