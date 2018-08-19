@@ -10,8 +10,7 @@ task :import_facilities => :environment do
             name: raw[1],
             location: RGeo::Cartesian.factory(:srid => 4326).point(*[raw[2],raw[3]].map(&:to_f).reverse),
             facility_type: "relief_material_collection",
-            details: raw[5],
-            contact: raw[6]
+            contact: raw[4]
            }
     puts data.inspect
     batch << data if data
@@ -26,8 +25,8 @@ task :import_facilities => :environment do
     puts raw
     data = { district: raw[0].downcase.strip,
             name: raw[1],
-            humanized_address: raw[2],
-            contact: raw[3],
+            contact: raw[2],
+            humanized_address: raw[3],
             location: RGeo::Cartesian.factory(:srid => 4326).point(*[raw[4],raw[5]].map(&:to_f).reverse),
             facility_type: "shelter"
            }
