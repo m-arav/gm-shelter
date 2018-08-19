@@ -120,7 +120,6 @@ function showNearestLocations(facility_type){
     lng = geo_location.lng;
     url = '/relief_facilities/search?within=' + lat + ',' + lng + '&facility_type=' + facility_type;
     $.get(url, function(data) {
-      console.log(data);
 	     if(data.length != 0){
 	         deleteMarkers();
 	         data.forEach(function(d) {
@@ -128,5 +127,15 @@ function showNearestLocations(facility_type){
 	         });
            map.setCenter(geo_location);
 	     } else { alert("No Centers or Shelters within 8 kms!"); }
+    });
+}
+
+function showLocations(facility_type) {
+    url = '/relief_facilities/search?&facility_type=' + facility_type;
+    $.get(url, function(data) {
+         deleteMarkers();
+         data.forEach(function(d) {
+	           addMarker(d);
+         });
     });
 }
