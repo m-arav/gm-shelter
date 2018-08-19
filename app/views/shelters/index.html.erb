@@ -1,8 +1,12 @@
 <div id="floating-panel">
+  <div class="marker-visbility-buttons">
   <input class="primary-btn margin-to-right" onclick="clearMarkers();" type=button value="Hide Markers">
   <input class="primary-btn" onclick="showMarkers();" type=button value="Show All Markers">
-  <input class="primary-btn" onclick="showNearestLocations('relief_material_collection');" type=button value="Show Nearest Centers">
-  <input class="primary-btn" onclick="showNearestLocations('shelter');" type=button value="Show Nearest Shelters">
+  </div>
+  <div>
+    <input class="primary-btn" onclick="showNearestLocations('relief_material_collection');" type=button value="Show Nearest Centers">
+    <input class="primary-btn" onclick="showNearestLocations('shelter');" type=button value="Show Nearest Shelters">
+  </div>
 </div>
 
 <div id="map"></div>
