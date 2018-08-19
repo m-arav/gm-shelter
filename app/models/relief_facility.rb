@@ -7,6 +7,7 @@ class ReliefFacility < ApplicationRecord
     } % [longitude, latitude, distance_in_km * 1000]).order("ST_Distance(location, 'POINT(#{longitude} #{latitude})') asc") # approx
   }
   scope :colleciton_centers, -> () { where(facility_type: "relief_material_collection") }
+  scope :shelters, -> () { where(facility_type: "shelter") }
 
   enum district: [:ernakulam,
                   :malappuram,
