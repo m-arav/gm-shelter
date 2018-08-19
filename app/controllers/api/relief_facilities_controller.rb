@@ -7,6 +7,23 @@ class Api::ReliefFacilitiesController < ApplicationController
       @relief_facilities = @relief_facilities.shelters if params[:facility_type] == 'shelter'
       @relief_facilities = @relief_facilities.colleciton_centers if params[:facility_type] == 'relief_material_collection'
     end
-    render json: @relief_facilities.all
+    setup_result
+    render json: @result
+  end
+
+  private
+
+  def setup_result
+    if params[:within].blank?
+      if params[:facility_type].blank?
+        @result = ALL_FACILITIES
+      elsif params[:facility_type] == 'shelter'
+        @result = ALL_SHELTERS
+      else
+        @result = @relief_facilities.all
+      end
+    else
+      @result = @relief_facilities.all
+    end
   end
 end
