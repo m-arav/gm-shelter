@@ -37,3 +37,23 @@ task :import_facilities => :environment do
 
   ReliefFacility.import! batch
 end
+
+task :export_nearby_collection_centers => :environment do
+  CSV.open("nearest_collection_centers.csv", "wb") do |csv|
+    csv << ["shelter name", "collection center", "url"]
+    ReliefFacility.where(facility_type: 'shelter').each do |shelter|
+      p = shelter
+      c = ReliefFacility.within(p.location.lat, p.location.lon).where(facility_type: 'relief_material_collection').first
+
+      if c
+        csv << [p.name, c.name, "https://www.google.com/maps/dir/?api=1&origin=#{p.location.lat},#{p.location.lon}&destination=#{c.location.lat},#{c.location.lon}"]
+      else
+        puts "no collection centers "
+        puts p.name
+        puts ReliefFacility.within(p.location.lat, p.location.lon).where(facility_type: 'relief_material_collection').to_sql
+        csv << [p.name]
+      end
+
+    end
+  end
+en
