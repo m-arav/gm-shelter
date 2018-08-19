@@ -1,16 +1,15 @@
 <div id="floating-panel">
-
-<div class="btn-group">
-    <button id="options" class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters</button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" onclick="clearMarkers();">Hide Markers</a>
-        <a class="dropdown-item" onclick="showMarkers();">Show All Markers</a>
-        <a class="dropdown-item" onclick="showLocations('relief_material_collection');">All Centers</a>
-        <a class="dropdown-item" onclick="showLocations('shelter');">All Shelters</a>
-        <a class="dropdown-item" onclick="showNearestLocations('relief_material_collection');">Centers Near Me</a>
-        <a class="dropdown-item" onclick="showNearestLocations('shelter');">Shelters Near Me</a>
+    <div class="btn-group dropup">
+        <button id="options" class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters</button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" onclick="showNearestLocations('relief_material_collection');">Centers Near Me</a>
+            <a class="dropdown-item" onclick="showNearestLocations('shelter');">Shelters Near Me</a>
+            <a class="dropdown-item" onclick="showLocations('relief_material_collection');">All Centers</a>
+            <a class="dropdown-item" onclick="showLocations('shelter');">All Shelters</a>
+            <a class="dropdown-item" onclick="showMarkers();">Show All Markers</a>
+            <a class="dropdown-item" onclick="clearMarkers();">Hide Markers</a>
+        </div>
     </div>
-</div>
 </div>
 
 <div id="map"></div>

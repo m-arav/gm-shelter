@@ -42,7 +42,7 @@
  }
  #floating-panel {
    position: absolute;
-   top: 60px;
+   bottom: 20px;
    z-index: 5;
    padding: 5px;
    text-align: center;

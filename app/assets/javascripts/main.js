@@ -44,7 +44,7 @@ function addMarker(ldata) {
 	      nearCCButton ='<input class="primary-btn" onclick="nearByCollectionCenters('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Near by collection centers">';
 	      directionToCCButton = '<input class="primary-btn" onclick="routeToNearestCC('+ ldata.location.lat + ',' + ldata.location.lon + ');" type=button value="Direction to nearest collection center">';
     }
-    infoDetails = '<h3>' + ldata.name + '</h3>' +
+    infoDetails = '<h5>' + ldata.name + '</h5>' +
 	    '<div id="address"> <b>Address : </b> ' + ldata.humanized_address + '</div><br>' +
 	    '<div id="details"> <b>Contact : </b>' + ldata.contact + '</div><br>' +
       '<a href="' + 'https://www.google.com/maps/search/?api=1&query=' + ldata.location.lat + ',' + ldata.location.lon + '" target="_blank">Open in Google Maps</a><br><br>' +
