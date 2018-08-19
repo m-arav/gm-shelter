@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: gm-shelter_production
-  username: gm-shelter
-  password: <%= ENV['GM-SHELTER_DATABASE_PASSWORD'] %>
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, "postgis") %>
