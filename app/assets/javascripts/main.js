@@ -1,7 +1,7 @@
 var map;
 var markers = [];
-var collectionCenterIcon = 'http://res.cloudinary.com/drch6exvq/image/upload/c_scale,h_32/v1534605020/Kerala%20Flood/collection.png'
-var shelterIcon = 'http://res.cloudinary.com/drch6exvq/image/upload/c_scale,h_32,q_100/v1534605020/Kerala%20Flood/shelter.png'
+var collectionCenterIcon = 'https://res.cloudinary.com/drch6exvq/image/upload/c_scale,h_32,q_100/v1534605020/Kerala Flood/collection.png'
+var shelterIcon = 'https://res.cloudinary.com/drch6exvq/image/upload/c_scale,h_32,q_100/v1534605020/Kerala Flood/shelter.png'
 var infowindow = null;
 var geo_location = { lat: 9.97892,lng: 76.3180348 }
 var location_granted = false;
